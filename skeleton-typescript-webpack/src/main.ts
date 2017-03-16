@@ -1,4 +1,7 @@
-﻿import {Aurelia} from 'aurelia-framework';
+/**
+ * Created by jeevan on 15/3/17.
+ */
+import {Aurelia} from 'aurelia-framework';
 // we want font-awesome to load as soon as possible to show the fa-spinner
 import '../styles/styles.css';
 import 'font-awesome/css/font-awesome.css';
@@ -24,10 +27,10 @@ export async function configure(aurelia: Aurelia) {
   await aurelia.start();
   aurelia.setRoot('app');
 
-  // if you would like your website to work offline (Service Worker), 
+  // if you would like your website to work offline (Service Worker),
   // install and enable the @easy-webpack/config-offline package in webpack.config.js and uncomment the following code:
   /*
-  const offline = await System.import('offline-plugin/runtime');
-  offline.install();
-  */
+   const offline = await System.import('offline-plugin/runtime');
+   offline.install();
+   */
 }
