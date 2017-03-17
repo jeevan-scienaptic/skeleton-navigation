@@ -1,24 +1,34 @@
 /**
  * Created by jeevan on 15/3/17.
  */
-
-import {WebAPI} from './WebAPI';
 import {autoinject} from 'aurelia-framework';
+import 'whatwg-fetch';
+import {HttpClient} from 'aurelia-fetch-client';
+import {DataService} from './serviceLayer';
 
 @autoinject
-export class ContactList{
+export class ContactList {
 
-  webApi:WebAPI;
   contactList;
-  selectedId:number;
+  selectedId: number;
+  dataService: DataService;
 
-  constructor(webApi:WebAPI){
-    this.webApi = webApi;
+
+  constructor(httpClient: HttpClient, dataService : DataService) {
+    this.httpClient = httpClient;
+    this.dataService = dataService;
     this.contactList = [];
   }
 
-  created(){
-    this.webApi.getContactList().then((contacts) => this.contactList = contacts);
+  created() {
+    this.fetchData().then((response) => {this.contactList = response; console.log(this.contactList)});
+
+  }
+
+  async fetchData(){
+    let temp = await this.dataService.getContactList();
+    console.log(temp);
+    return temp;
   }
 
   selectContact(contact) {

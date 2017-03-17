@@ -10,19 +10,25 @@ import 'bootstrap';
 
 // comment out if you don't want a Promise polyfill (remove also from webpack.config.js)
 import * as Bluebird from 'bluebird';
-Bluebird.config({ warnings: false });
+Bluebird.config({warnings: false});
 
 export async function configure(aurelia: Aurelia) {
   aurelia.use
     .standardConfiguration()
-    .developmentLogging();
+    .developmentLogging()
 
-  // Uncomment the line below to enable animation.
-  // aurelia.use.plugin('aurelia-animator-css');
-  // if the css animator is enabled, add swap-order="after" to all router-view elements
+    // Uncomment the line below to enable animation.
+    // aurelia.use.plugin('aurelia-animator-css');
+    // if the css animator is enabled, add swap-order="after" to all router-view elements
 
-  // Anyone wanting to use HTMLImports to load views, will need to install the following plugin.
-  // aurelia.use.plugin('aurelia-html-import-template-loader')
+    // Anyone wanting to use HTMLImports to load views, will need to install the following plugin.
+    // aurelia.use.plugin('aurelia-html-import-template-loader')
+
+
+    //aurelia API
+    .plugin('aurelia-api', config => {
+      config.registerEndpoint('localJson', 'src/data.json');
+    });
 
   await aurelia.start();
   aurelia.setRoot('app');

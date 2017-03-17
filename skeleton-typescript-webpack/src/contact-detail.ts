@@ -3,27 +3,20 @@
  */
 
 import {autoinject} from 'aurelia-framework';
-import {WebAPI} from './WebAPI'
+import {DataService} from './serviceLayer';
 
 @autoinject
 export class ContactDetail {
-
-  webApi: WebAPI;
   contactDetail;
+  dataService: DataService;
 
-  constructor(webApi:WebAPI){
-
-    this.webApi = webApi;
-
+  constructor(dataService: DataService) {
+    this.dataService = dataService;
   }
 
-  activate(params){
-
-    this.webApi.getContactDetails(params.id).then( (contact) => {
-      this.contactDetail = contact;
-    } );
-
-
+  activate(params) {
+    this.contactDetail = this.dataService.getContactDetails(params.id);
+    console.log(this.contactDetail);
   }
 
 }
